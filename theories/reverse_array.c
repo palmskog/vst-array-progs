@@ -1,4 +1,4 @@
-//@+ CheckArithOverflow = yes
+#include <stdio.h>
 
 /*@ predicate swapped{L1,L2}(int[] a, integer i, integer j) =
   @   \at(a[i],L1) == \at(a[j],L2) && \at(a[j],L1) == \at(a[i],L2);
@@ -32,42 +32,51 @@
   @     reversed{L,L2}(a, 0, i + 1, a.length - 1);
   @*/
 
-public class Strings {
+/*@ requires 
+  @   a != null && 0 <= i < a.length && 0 <= j < a.length;
+  @
+  @ assigns
+  @   a[i], a[j];
+  @
+  @ ensures 
+  @   swapped{Old,Here}(a, i, j);
+  @*/
+void swap(int a[], int i, int j){
+  int tmp = a[i];
+  a[i] = a[j];
+  a[j] = tmp;
+}
 
-    /*@ requires 
-      @   a != null && 0 <= i < a.length && 0 <= j < a.length;
-      @
-      @ assigns
-      @   a[i], a[j];
-      @
-      @ ensures 
-      @   swapped{Old,Here}(a, i, j);
-      @*/
-    public static void swap(int[] a, int i, int j) {
-	int tmp = a[i];
-	a[i] = a[j];
-	a[j] = tmp;
-    }
+/*@ requires 
+  @   a != null;
+  @
+  @ assigns
+  @   a[..];
+  @
+  @ ensures 
+  @   reversed{Old,Here}(a, 0, a.length/2, a.length - 1);
+  @*/
+void reverse(int a[], int len) {
+  int i;
+  /*@ loop_invariant
+    @   reversed{Pre,Here}(a, 0, i, a.length - 1) && 0 <= i <= a.length - i + 1;
+    @
+    @ loop_variant
+    @   a.length - 1 - i;
+    @*/
+  for (i = 0; i <= len - 1 - i; i++) {
+    swap(a, i, len - 1 - i);
+  }
+}
 
-    /*@ requires 
-      @   a != null;
-      @
-      @ assigns
-      @   a[..];
-      @
-      @ ensures 
-      @   reversed{Old,Here}(a, 0, a.length/2, a.length - 1);
-      @*/
-    public static void reverse(int[] a) {
-	/*@ loop_invariant
-	  @   reversed{Pre,Here}(a, 0, i, a.length - 1) && 0 <= i <= a.length - i + 1;
-	  @
-	  @ loop_variant
-	  @   a.length - 1 - i;
-	  @*/
-	for (int i = 0; i <= a.length - 1 - i; i++) {
-	    swap(a, i, a.length - 1 - i);
-	}
-    }
+int four[4] = {1,2,3,4};
 
+int main(void) {
+  int i;
+  reverse(four,4);
+  reverse(four,4);
+  for (i = 0; i < 4; i++) {
+    printf("%d\n", four[i]);
+  }
+  return 0;
 }
