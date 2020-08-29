@@ -1,4 +1,6 @@
--Q theories VSTProgs
+-Q theories VSTArrayProgs
 
 theories/binary_search.v
 theories/reverse_array.v
+theories/verif_binary_search.v
+theories/verif_reverse_array.v
