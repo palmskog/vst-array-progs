@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "palmskog@gmail.com"
+version: "dev"
+
+homepage: "https://github.com/palmskog/vst-array-progs"
+dev-repo: "git+https://github.com/palmskog/vst-array-progs.git"
+bug-reports: "https://github.com/palmskog/vst-array-progs/issues"
+license: "MIT"
+
+synopsis: "A bunch of array-related C programs verified in VST with Coq"
+description: """
+Several C programs for manipulating and searching arrays, verified
+using the VST framework in Coq."""
+
+build: [make "-j%{jobs}%" ]
+install: [make "install"]
+depends: [
+  "coq" {>= "8.11" & < "8.13~"}
+  "coq-compcert" {>= "3.7" & < "3.8~"}
+  "coq-vst" {>= "2.6" & < "2.7~"}
+]
+
+tags: [
+  "category:Computer Science/Decision Procedures and Certified Algorithms/Correctness proofs of algorithms"
+  "keyword:array"
+  "keyword:C"
+  "logpath:VSTArrayProgs"
+]
+authors: [
+  "Karl Palmskog"
+]

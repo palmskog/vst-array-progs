@@ -1,0 +1,70 @@
+---
+fullname: VST Array Programs
+shortname: vst-array-progs
+organization: palmskog
+community: false
+action: true
+
+synopsis: A bunch of array-related C programs verified in VST with Coq
+
+description: |-
+  Several C programs for manipulating and searching arrays, verified
+  using the VST framework in Coq.
+
+authors:
+- name: Karl Palmskog
+
+opam-file-maintainer: palmskog@gmail.com
+
+opam-file-version: dev
+
+license:
+  fullname: MIT License
+  identifier: MIT
+
+supported_coq_versions:
+  text: 8.11 or later
+  opam: '{>= "8.11" & < "8.13~"}'
+
+tested_coq_opam_versions:
+- version: '8.12'
+- version: '8.11'
+
+dependencies:
+- opam:
+    name: coq-compcert
+    version: '{>= "3.7" & < "3.8~"}'
+  description: |-
+    [CompCert](http://compcert.inria.fr) 3.7
+- opam:
+    name: coq-vst
+    version: '{>= "2.6" & < "2.7~"}'
+  description: |-
+    [VST](https://vst.cs.princeton.edu) 2.6
+
+namespace: VSTArrayProgs
+
+keywords:
+- name: array
+- name: C
+
+categories:
+- name: Computer Science/Decision Procedures and Certified Algorithms/Correctness proofs of algorithms
+
+build: |-
+  ## Building and installation instructions
+
+  To build and install, do:
+
+  ``` shell
+  git clone https://github.com/palmskog/vst-array-progs.git
+  cd vst-array-progs
+  make   # or make -j <number-of-cores-on-your-machine> 
+  make install
+  ```
+
+documentation: |-
+  ## Documentation
+
+  More similar programs can be found in the [VST repository](https://github.com/PrincetonUniversity/VST/tree/master/progs).
+---

@@ -1,0 +1,4 @@
+(coq.theory
+ (name VSTArrayProgs)
+ (package coq-vst-array-progs)
+ (synopsis "A bunch of array-related C programs verified in VST with Coq"))
