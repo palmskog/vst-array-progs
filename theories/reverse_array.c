@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 /*@ predicate swapped{L1,L2}(int[] a, integer i, integer j) =
   @   \at(a[i],L1) == \at(a[j],L2) && \at(a[j],L1) == \at(a[i],L2);
   @*/
@@ -71,12 +69,9 @@ void reverse(int a[], int len) {
 
 int four[4] = {1,2,3,4};
 
-int main(void) {
+int main(void){
   int i;
   reverse(four,4);
   reverse(four,4);
-  for (i = 0; i < 4; i++) {
-    printf("%d\n", four[i]);
-  }
   return 0;
 }

@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 /*@ predicate insertion_point{L}(integer ip, int key, int* a, integer len) =
   @   0 <= ip <= len &&
   @   (\forall integer i; 0 <= i < ip ==> \at(a[i], L) < key) &&
@@ -104,10 +102,5 @@ int four[4] = {1, 2, 3, 4};
 int main(void){
   int s;
   s = binary_search(four, 4, 5);
-  if (s >= 0) {
-    printf("Found key = %d\n", s);
-  } else {
-    printf("Insertion point = %d\n", -s-1);
-  }
   return 0;
 }
