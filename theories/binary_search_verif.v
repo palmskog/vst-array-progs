@@ -85,33 +85,37 @@ forward_while (binary_search_while_spec a sh contents len key).
   Exists 0; Exists (Zlength contents - 1).
   entailer!.
   split; intros; [|split].
-  * assert (H11 : Zlength contents - 1 + 1 = Zlength contents) by lia.
-    rewrite H11; clear H11.
-    unfold sublist.
-    rewrite skipn_0.
-    rewrite Zlength_correct.
-    assert (Heq: Z.to_nat (Z.of_nat (Datatypes.length contents)) = Datatypes.length contents) by lia.
-    rewrite Heq.
-    rewrite firstn_exact_length.
+  * autorewrite with sublist in *.
     assumption.
-  * unfold sublist.
-    rewrite skipn_0.
-    rewrite firstn_O.
+  * autorewrite with sublist in *.
     apply Forall_nil.
-  * unfold sublist.
-    assert (H11 : Zlength contents - 1 + 1 = Zlength contents) by lia.
-    rewrite H11; clear H11.    
-    rewrite Zlength_correct.
-    assert (Heq: Z.to_nat (Z.of_nat (Datatypes.length contents)) = Datatypes.length contents) by lia.
-    rewrite Heq.
-    rewrite firstn_exact_length.
-    rewrite skipn_exact_length.
+  * autorewrite with sublist in *.
     apply Forall_nil.
 - entailer!.
 - forward.
   * entailer!.
     split.
-    + admit.
+    + assert (Hle: low <= high) by lia.
+      pose proof (mean_le _ _  Hle) as Hdle.
+      assert (Heq: (high - low) / 2 = Int.signed (Int.divs (Int.repr (high - low)) (Int.repr 2))).
+        unfold Int.divs.
+        rewrite !Int.signed_repr.
+        -- rewrite Zquot.Zquot_Zdiv_pos by lia; reflexivity.
+        -- set (j := Int.min_signed) in *; compute in j; subst j.
+           set (j := Int.max_signed) in *; compute in j; subst j.
+           lia.
+        -- set (j := Int.min_signed) in *; compute in j; subst j.
+           set (j := Int.max_signed) in *; compute in j; subst j.
+           lia.
+        -- rewrite !Int.signed_repr;
+             set (j := Int.min_signed) in *; compute in j; subst j;
+             set (j := Int.max_signed) in *; compute in j; subst j; try lia.
+           rewrite Zquot.Zquot_Zdiv_pos by lia.
+           lia.
+        -- rewrite <- Heq.
+           set (j := Int.min_signed) in *; compute in j; subst j.
+           set (j := Int.max_signed) in *; compute in j; subst j.
+           lia.
     + intro.
       destruct H0.
       unfold Int.mone in H11.
@@ -125,27 +129,79 @@ forward_while (binary_search_while_spec a sh contents len key).
          set (j := Int.max_signed) in *; compute in j; subst j.
          lia.
    * assert_PROP (0 <= Int.unsigned (Int.add (Int.repr low) (Int.divs (Int.repr (high - low)) (Int.repr 2))) < Zlength (map Int.repr contents)).
-       entailer!.       
+       entailer!.
+       autorewrite with sublist.
        admit.
      assert_PROP ((0 <= Int.unsigned (Int.add (Int.repr low) (Int.divs (Int.repr (high - low)) (Int.repr 2))) < Zlength contents)).
        entailer!.
-       admit.
+       autorewrite with sublist in *.
+       apply H8.
      forward.
      forward_if.
      -- forward.
         ** entailer!.
-           admit.
+           assert (Hle: low <= high) by lia.
+           pose proof (mean_le _ _  Hle) as Hdle.
+           assert (Heq: low + (high - low) / 2 = Int.signed (Int.add (Int.repr low) (Int.divs (Int.repr (high - low)) (Int.repr 2)))).
+             unfold Int.divs.
+             rewrite add_repr.
+             rewrite !Int.signed_repr.
+             ++ rewrite Zquot.Zquot_Zdiv_pos by lia; reflexivity.
+             ++ set (j := Int.min_signed) in *; compute in j; subst j.
+               set (j := Int.max_signed) in *; compute in j; subst j.
+               lia.
+             ++ set (j := Int.min_signed) in *; compute in j; subst j.
+               set (j := Int.max_signed) in *; compute in j; subst j.
+               lia.
+             ++ rewrite !Int.signed_repr;
+               set (j := Int.min_signed) in *; compute in j; subst j;
+               set (j := Int.max_signed) in *; compute in j; subst j; try lia.
+               rewrite Zquot.Zquot_Zdiv_pos by lia.
+               lia.
+             ++ rewrite <- Heq.
+               set (j := Int.min_signed) in *; compute in j; subst j.
+               set (j := Int.max_signed) in *; compute in j; subst j.
+               lia.
         ** entailer!.
            Exists ((low + ((high - low)/2)) + 1,high).
            entailer!.
+           assert (Hle: low <= high) by lia.
+           pose proof (mean_le _ _  Hle) as Hdle.
+           split; [lia|].           
            admit.
       -- forward_if.
          ** forward.
             ++ entailer!.
-              admit.
+              assert (Hle: low <= high) by lia.
+              pose proof (mean_le _ _  Hle) as Hdle.
+              assert (Heq: low + (high - low) / 2 = Int.signed (Int.add (Int.repr low) (Int.divs (Int.repr (high - low)) (Int.repr 2)))).
+                unfold Int.divs.
+                rewrite add_repr.
+                rewrite !Int.signed_repr.
+                --- rewrite Zquot.Zquot_Zdiv_pos by lia; reflexivity.
+                --- set (j := Int.min_signed) in *; compute in j; subst j.
+                    set (j := Int.max_signed) in *; compute in j; subst j.
+                    lia.
+                --- set (j := Int.min_signed) in *; compute in j; subst j.
+                    set (j := Int.max_signed) in *; compute in j; subst j.
+                    lia.
+                --- rewrite !Int.signed_repr;
+                    set (j := Int.min_signed) in *; compute in j; subst j;
+                    set (j := Int.max_signed) in *; compute in j; subst j; try lia.
+                    rewrite Zquot.Zquot_Zdiv_pos by lia.
+                    lia.
+                --- rewrite <- Heq.
+                    set (j := Int.min_signed) in *; compute in j; subst j.
+                    set (j := Int.max_signed) in *; compute in j; subst j.
+                    lia.
             ++ entailer!.
               Exists (low,(low + ((high - low)/2)) - 1).
               entailer!.
+              autorewrite with sublist in *.
+              assert (Hle: low <= high) by lia.
+              pose proof (mean_le _ _  Hle) as Hdle.
+              set (j := Int.min_signed) in *; compute in j; subst j.
+              split; [lia|].              
               admit.
          ** forward.
             assert (H_key_eq:
@@ -153,7 +209,8 @@ forward_while (binary_search_while_spec a sh contents len key).
             Exists (low + ((high - low) / 2)).
             entailer!.
             case (in_dec _ _); intro.
-            ++ admit.
+            ++ autorewrite with sublist in *.
+              admit.
             ++ contradict n.
               admit.
 - forward.
@@ -169,7 +226,14 @@ forward_while (binary_search_while_spec a sh contents len key).
       contradict H6.
       assert (Hlow: high + 1 <= low) by lia.
       rewrite sublist_nil1; auto.
-    * admit.
+    * unfold insertion_point.
+      assert (Hl: - (- low - 1) - 1 = low) by lia.
+      rewrite Hl.
+      specialize (H7 n).
+      destruct H7.
+      split; [lia|].
+      split; auto.
+      admit.      
 Admitted.
 
 (*

@@ -58,6 +58,24 @@ induction l.
   reflexivity.
 Qed.
 
+Lemma upd_Znth_Zswap_pos :
+  forall contents i j,
+  0 <= i < Zlength contents ->
+  0 <= j < Zlength contents ->    
+  upd_Znth j (upd_Znth i (map Vint (map Int.repr contents)) (Vint (Int.repr (Znth j contents)))) (Vint (Int.repr (Znth i contents))) = map Vint (map Int.repr (Zswap_pos i j contents)).
+Proof.
+induction contents.
+- intros.
+  simpl.
+  unfold Zswap_pos.
+  case (zlt i 0); intros; [lia|].
+  case (zlt j 0); intros; [lia|].
+  simpl.
+  admit.
+- intros.
+  simpl in *.
+Admitted.
+
 Lemma body_swap: semax_body Vprog Gprog f_swap swap_spec.
 Proof.
 start_function.
@@ -66,18 +84,5 @@ forward.
 forward.
 forward.
 entailer!.
-unfold data_at, field_at; simpl.
-entailer!.
-unfold at_offset.
-entailer!.
-unfold data_at_rec.
-simpl.
-entailer!.
-unfold array_pred,aggregate_pred.array_pred.
-entailer!.
-- admit.
-- unfold at_offset.
-  erewrite aggregate_pred.rangespec_ext.
-  * admit.
-  * admit.
-Admitted.
+rewrite upd_Znth_Zswap_pos; auto.
+Qed.
