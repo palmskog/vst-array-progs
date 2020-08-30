@@ -39,7 +39,7 @@
   @ ensures 
   @   swapped{Old,Here}(a, i, j);
   @*/
-void swap(int a[], int i, int j){
+void swap(int a[], int i, int j) {
   int tmp = a[i];
   a[i] = a[j];
   a[j] = tmp;
@@ -55,22 +55,20 @@ void swap(int a[], int i, int j){
   @   reversed{Old,Here}(a, 0, a.length/2, a.length - 1);
   @*/
 void reverse(int a[], int len) {
-  int i;
   /*@ loop_invariant
     @   reversed{Pre,Here}(a, 0, i, a.length - 1) && 0 <= i <= a.length - i + 1;
     @
     @ loop_variant
     @   a.length - 1 - i;
     @*/
-  for (i = 0; i <= len - 1 - i; i++) {
+  for (int i = 0; i <= len - 1 - i; i++) {
     swap(a, i, len - 1 - i);
   }
 }
 
 int four[4] = {1,2,3,4};
 
-int main(void){
-  int i;
+int main() {
   reverse(four,4);
   reverse(four,4);
   return 0;

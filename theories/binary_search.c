@@ -64,7 +64,7 @@
   @ complete behaviors;
   @
   @*/
-int binary_search(int a[], int len, int key){
+int binary_search(int a[], int len, int key) {
   int low = 0;
   int high = len - 1;
   /*@ loop invariant 
@@ -99,8 +99,7 @@ int binary_search(int a[], int len, int key){
 
 int four[4] = {1, 2, 3, 4};
 
-int main(void){
-  int s;
-  s = binary_search(four, 4, 5);
+int main() {
+  int s = binary_search(four, 4, 5);
   return 0;
 }

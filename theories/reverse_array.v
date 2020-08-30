@@ -12,7 +12,7 @@ Module Info.
   Definition bitsize := 32.
   Definition big_endian := false.
   Definition source_file := "reverse_array.c"%string.
-  Definition normalized := false.
+  Definition normalized := true.
 End Info.
 
 Definition ___builtin_ais_annot : ident := 1%positive.
@@ -76,13 +76,14 @@ Definition _main : ident := 61%positive.
 Definition _reverse : ident := 59%positive.
 Definition _swap : ident := 57%positive.
 Definition _tmp : ident := 56%positive.
+Definition _t'1 : ident := 62%positive.
 
 Definition f_swap := {|
   fn_return := tvoid;
   fn_callconv := cc_default;
   fn_params := ((_a, (tptr tint)) :: (_i, tint) :: (_j, tint) :: nil);
   fn_vars := nil;
-  fn_temps := ((_tmp, tint) :: nil);
+  fn_temps := ((_tmp, tint) :: (_t'1, tint) :: nil);
   fn_body :=
 (Ssequence
   (Sset _tmp
@@ -90,13 +91,15 @@ Definition f_swap := {|
       (Ebinop Oadd (Etempvar _a (tptr tint)) (Etempvar _i tint) (tptr tint))
       tint))
   (Ssequence
-    (Sassign
-      (Ederef
-        (Ebinop Oadd (Etempvar _a (tptr tint)) (Etempvar _i tint)
-          (tptr tint)) tint)
-      (Ederef
-        (Ebinop Oadd (Etempvar _a (tptr tint)) (Etempvar _j tint)
-          (tptr tint)) tint))
+    (Ssequence
+      (Sset _t'1
+        (Ederef
+          (Ebinop Oadd (Etempvar _a (tptr tint)) (Etempvar _j tint)
+            (tptr tint)) tint))
+      (Sassign
+        (Ederef
+          (Ebinop Oadd (Etempvar _a (tptr tint)) (Etempvar _i tint)
+            (tptr tint)) tint) (Etempvar _t'1 tint)))
     (Sassign
       (Ederef
         (Ebinop Oadd (Etempvar _a (tptr tint)) (Etempvar _j tint)
@@ -146,7 +149,7 @@ Definition f_main := {|
   fn_callconv := cc_default;
   fn_params := nil;
   fn_vars := nil;
-  fn_temps := ((_i, tint) :: nil);
+  fn_temps := nil;
   fn_body :=
 (Ssequence
   (Ssequence
