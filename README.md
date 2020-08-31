@@ -17,7 +17,9 @@ using the VST framework in Coq.
   - Karl Palmskog
 - License: [MIT License](LICENSE)
 - Compatible Coq versions: 8.11 or later
-- Additional dependencies: none
+- Additional dependencies:
+  - [CompCert](http://compcert.inria.fr) 3.7
+  - [VST](https://vst.cs.princeton.edu) 2.6
 - Coq namespace: `VSTArrayProgs`
 - Related publication(s): none
 
