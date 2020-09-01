@@ -100,6 +100,6 @@ int binary_search(int a[], int len, int key) {
 int four[4] = {1, 2, 3, 4};
 
 int main() {
-  int s = binary_search(four, 4, 5);
-  return 0;
+  int s = binary_search(four, 4, 3);
+  return s;
 }

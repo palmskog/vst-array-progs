@@ -146,9 +146,9 @@ Definition f_main := {|
                                  (Tcons tint (Tcons tint Tnil))) tint
                                cc_default))
         ((Evar _four (tarray tint 4)) :: (Econst_int (Int.repr 4) tint) ::
-         (Econst_int (Int.repr 5) tint) :: nil))
+         (Econst_int (Int.repr 3) tint) :: nil))
       (Sset _s (Etempvar _t'1 tint)))
-    (Sreturn (Some (Econst_int (Int.repr 0) tint))))
+    (Sreturn (Some (Etempvar _s tint))))
   (Sreturn (Some (Econst_int (Int.repr 0) tint))))
 |}.
 
