@@ -1,0 +1,8 @@
+theories/binary_search.v: theories/binary_search.c
+	clightgen -normalize $<
+
+theories/reverse_array.v: theories/reverse_array.c
+	clightgen -normalize $<	
+
+clean::
+	rm -f theories/binary_search.v theories/reverse_array.v

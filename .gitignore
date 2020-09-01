@@ -10,3 +10,5 @@ _build
 *.vok
 *.vos
 .lia.cache
+theories/binary_search.v
+theories/reverse_array.v

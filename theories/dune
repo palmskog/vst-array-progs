@@ -2,3 +2,13 @@
  (name VSTArrayProgs)
  (package coq-vst-array-progs)
  (synopsis "A bunch of array-related C programs verified in VST with Coq"))
+
+(rule
+ (target binary_search.v)
+ (deps binary_search.c)
+ (action (run clightgen -normalize %{deps})))
+
+(rule
+ (target reverse_array.v)
+ (deps reverse_array.c)
+ (action (run clightgen -normalize %{deps})))
