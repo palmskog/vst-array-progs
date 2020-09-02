@@ -36,4 +36,4 @@ make install
 
 ## Documentation
 
-More similar programs can be found in the [VST repository](https://github.com/PrincetonUniversity/VST/tree/master/progs).
+Additional verified programs can be found in the [VST repository](https://github.com/PrincetonUniversity/VST/tree/master/progs).
