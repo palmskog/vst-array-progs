@@ -33,7 +33,7 @@ tested_coq_opam_versions:
 dependencies:
 - opam:
     name: coq-compcert
-    version: '{>= "3.7~" & < "3.8~"}'
+    version: '{(= "3.7~coq_platform") | (= "3.7+8.12~coq_platform")}'
   description: |-
     [CompCert](http://compcert.inria.fr) 3.7
 - opam:
