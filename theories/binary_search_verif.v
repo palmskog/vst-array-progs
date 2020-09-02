@@ -20,7 +20,8 @@ Definition binary_search_spec :=
           SEP (data_at sh (tarray tint (Zlength contents)) (map Vint (map Int.repr contents)) a)
   POST [ tint ]
     EX i:Z,
-         PROP (if in_dec Z.eq_dec key contents then Znth i contents = key else insertion_point (-i - 1) key contents)
+         PROP (if in_dec Z.eq_dec key contents then Znth i contents = key
+               else insertion_point (-i - 1) contents key 0 (Zlength contents))
          RETURN (Vint (Int.repr i))
          SEP (data_at sh (tarray tint (Zlength contents)) (map Vint (map Int.repr contents)) a).
 

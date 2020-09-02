@@ -14,10 +14,10 @@ match l with
 | x :: y :: l' => x <= y /\ sorted' l'
 end.
 
-Definition insertion_point (ip : Z) (key : Z) (l : list Z) :=
-0 <= ip <= Zlength l /\
-Forall (fun x => x < key) (sublist 0 ip l) /\
-Forall (fun x => key < x) (sublist ip (Zlength l) l).
+Definition insertion_point (ip : Z)  (l : list Z) (key from to : Z) : Prop :=
+from <= ip <= to /\
+Forall (fun x => x < key) (sublist from ip l) /\
+Forall (fun x => key < x) (sublist ip to l).
 
 Lemma sublist_nil1 : forall A i j (l : list A), j <= i -> sublist i j l = [].
 Proof.
