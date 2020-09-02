@@ -9,6 +9,11 @@
  (action (run clightgen -normalize %{deps})))
 
 (rule
+ (target binary_search_range.v)
+ (deps binary_search_range.c)
+ (action (run clightgen -normalize %{deps})))
+
+(rule
  (target reverse_array.v)
  (deps reverse_array.c)
  (action (run clightgen -normalize %{deps})))
