@@ -8,8 +8,10 @@
   @*/
 
 /*@ predicate reversed{L1,L2}(int[] a, integer low, integer high, integer max) =
+  @   (\forall integer k; 0 <= k < low ==> \at(a[k], L1) == \at(a[k], L2)) &&
   @   (\forall integer i; low <= i < high ==> swapped{L1,L2}(a, i, max - i)) &&
-  @   (\forall integer k; high <= k <= max - high ==> \at(a[k], L1) == \at(a[k], L2));
+  @   (\forall integer k; high <= k <= max - high ==> \at(a[k], L1) == \at(a[k], L2)) &&
+  @   (\forall integer k; max - low <= k <= max ==> \at(a[k], L1) == \at(a[k], L2));
   @*/
 
 /*@ lemma reversed_after{L1,L2}:
