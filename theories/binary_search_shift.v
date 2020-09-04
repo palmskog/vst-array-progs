@@ -11,7 +11,7 @@ Module Info.
   Definition abi := "standard"%string.
   Definition bitsize := 32.
   Definition big_endian := false.
-  Definition source_file := "binary_search_shift.c"%string.
+  Definition source_file := "src/binary_search_shift.c"%string.
   Definition normalized := true.
 End Info.
 

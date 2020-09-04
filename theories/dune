@@ -5,20 +5,20 @@
 
 (rule
  (target binary_search.v)
- (deps binary_search.c)
- (action (run clightgen -normalize %{deps})))
+ (deps ../src/binary_search.c)
+ (action (run clightgen -o %{target} -normalize %{deps})))
 
 (rule
  (target binary_search_range.v)
- (deps binary_search_range.c)
- (action (run clightgen -normalize %{deps})))
+ (deps ../src/binary_search_range.c)
+ (action (run clightgen -o %{target} -normalize %{deps})))
 
 (rule
  (target binary_search_shift.v)
- (deps binary_search_shift.c)
- (action (run clightgen -normalize %{deps})))
+ (deps ../src/binary_search_shift.c)
+ (action (run clightgen -o %{target} -normalize %{deps})))
 
 (rule
  (target reverse_array.v)
- (deps reverse_array.c)
- (action (run clightgen -normalize %{deps})))
+ (deps ../src/reverse_array.c)
+ (action (run clightgen -o %{target} -normalize %{deps})))

@@ -11,7 +11,7 @@ Module Info.
   Definition abi := "standard"%string.
   Definition bitsize := 32.
   Definition big_endian := false.
-  Definition source_file := "theories/binary_search_range.c"%string.
+  Definition source_file := "src/binary_search_range.c"%string.
   Definition normalized := true.
 End Info.
 

@@ -11,7 +11,7 @@ Module Info.
   Definition abi := "standard"%string.
   Definition bitsize := 32.
   Definition big_endian := false.
-  Definition source_file := "theories/reverse_array.c"%string.
+  Definition source_file := "src/reverse_array.c"%string.
   Definition normalized := true.
 End Info.
 
